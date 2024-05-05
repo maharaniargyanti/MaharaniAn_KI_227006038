@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Enkripsi Dekripsi Algoritma Simetris</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        text-align: center;
+        padding: 20px;
+      }
+
+      h2 {
+        margin-bottom: 20px;
+      }
+
+      input[type="text"],
+      textarea {
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+        box-sizing: border-box;
+      }
+
+      .tombol {
+        margin-top: 10px;
+      }
+
+      .tombol button {
+        padding: 10px 20px;
+        margin-right: 10px;
+        cursor: pointer;
+        background-color: #4caf50;
+        border: none;
+        color: white;
+        border-radius: 5px;
+      }
+
+      .tombol button:hover {
+        background-color: #45a049;
+      }
+
+      #output {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Enkripsi Dekripsi Algoritma Simetris</h2>
+      <input type="text" id="key" placeholder="Masukkan kunci" />
+      <textarea id="message" placeholder="Masukkan pesan"></textarea>
+      <div class="tombol">
+        <button onclick="encrypt()">Enkripsi</button>
+        <button onclick="decrypt()">Dekripsi</button>
+      </div>
+      <textarea
+        id="output"
+        placeholder="Hasil akan ditampilkan di sini"
+        readonly
+      ></textarea>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script>
+      function encrypt() {
+        var key = document.getElementById("key").value;
+        var message = document.getElementById("message").value;
+        var encryptedMessage = CryptoJS.AES.encrypt(message, key).toString();
+        document.getElementById("output").value = encryptedMessage;
+      }
+
+      function decrypt() {
+        var key = document.getElementById("key").value;
+        var encryptedMessage = document.getElementById("output").value;
+        var decryptedBytes = CryptoJS.AES.decrypt(encryptedMessage, key);
+        var decryptedMessage = decryptedBytes.toString(CryptoJS.enc.Utf8);
+        document.getElementById("output").value = decryptedMessage;
+      }
+    </script>
+  </body>
+</html>
